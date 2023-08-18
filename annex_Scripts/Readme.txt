@@ -20,3 +20,8 @@ Extract from a multifasta the subsequences corresponding to specific regions
 From an alignment, and with one aligned genome as reference, create n alignment corresponding to each region of length x.
 For example, from an alignment, create n alignments of each 1kb portion of the genomes.
 
+###snp_positions.py
+
+From a vcf file, extract the number of SNP per 1kb in the genomes, and summarise the results in a text file
+
+###
