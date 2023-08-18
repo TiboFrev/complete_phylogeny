@@ -24,4 +24,6 @@ For example, from an alignment, create n alignments of each 1kb portion of the g
 
 From a vcf file, extract the number of SNP per 1kb in the genomes, and summarise the results in a text file
 
-###
+###snpplot.R
+
+Creates a density plot of the SNPs across the genome. Also add regions of recombination 
