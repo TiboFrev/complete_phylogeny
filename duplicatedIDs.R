@@ -1,7 +1,6 @@
 args <- commandArgs(trailingOnly = TRUE)
 
 dups <- readLines(args)
-pattern <- "^[A-Za-z]{2}\\d+\\.\\d+$|^[A-Za-z]{2}_\\d+\\.\\d+$|^[A-Za-z]\\d{5}\\.\\d+$"
 
 
 IDs <- c()
