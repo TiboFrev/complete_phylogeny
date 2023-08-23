@@ -1,7 +1,12 @@
+###This script takes in argument a list of positions (integers) and a fasta file
+###It returns several fasta files with the sequences of the specified regions of the input fasta file
+
+##Import the necessary package
 import os
 
-regs = [135021,135095,143865,144132,116144,118620,133724,134435] #regions to extract
+##Argument collection
 #each element is one edge, so one region is two elements (eg 135021-135095)
+regs = [135021,135095,143865,144132,116144,118620,133724,134435] #regions to extract
 fasta = open("C:\\Users\\frevillet\\Desktop\\fasta_files\\66_genomes\\66_LSDV_genomes.fasta", "r") #fasta file from which to extract
 
 ligne = fasta.readline()
