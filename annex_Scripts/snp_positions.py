@@ -1,5 +1,8 @@
-vcf = open ("C:\\Users\\frevillet\\Desktop\\fasta_files\\vcf\\62_genomes\\62_2334_snp.vcf")
+###This script takes in argument a vcf file and a reference aligned genome
+###It returns a text file with the number of SNP per n portions of the genomes (here n=1000 so the number of SNPs per kilobase)
 
+
+vcf = open ("C:\\Users\\frevillet\\Desktop\\fasta_files\\vcf\\62_genomes\\62_2334_snp.vcf")
 SNP=[]
 
 ####This part extracts the positions of each SNP out of the VCF file##########
