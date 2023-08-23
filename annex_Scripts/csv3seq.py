@@ -1,22 +1,25 @@
+###This script extract information from the output file of the recombination detection tool 3seq.
+###It has been created for specific analysis for LSDV, so it might require big changes to be adapted for another work
+
+
+##Import the required packages
 import csv
 import re
 from pprint import pprint
 import sys
 
+##Sort each genome to his belonging clade
 Clade13 = set(["OM984486.1","MW355944.1","OP922506.1","OM105589.1","OP508345.1","OP752701.1","OQ267778.1","OQ267777.1","ON152411.1","MW732649.1","OP985536.1","OL752713.2","MZ577075.1","MZ577074.1","OM803091.1","OM803092.1","MZ577073.1","MZ577076.1","OM793603.1","OM793602.1","OM984485.1"])
-
 Clade12 = set(["MN995838.1","KY702007.1","MT643825.1","KY829023.3","KX894508.1","MN642592.1","MW030512.1","MH893760.2","MW699032.1","OQ588787.1","AF409137.1","MW656253.1","OK318001.1","MW631933.1","KX683219.1","OP688129.1","OK422494.1","OP688128.1","OP297402.1","MN072619.1","NC_003027.1"])
-
 Clade11 = set(["OM793605.1","OM793607.1","OM793606.1","OM793608.1", "MK441838.1", "AF409138.1", "OM793609.1", "KX764645.1", "MG972412.1", "KX764643.1", "KX764644.1", "MW656252.1", "MW435866.1", "OM793604.1", "MN636839.1","MN636843.1", "MN636842.1", "MN636838.1"])
-
 Clade2 =set(["OM373209.1", "ON400507.1", "OK422492.1" ,  "OK422493.1"])
-
 R = set(["MT134042.1","OL542833.1","MH646674.1","OM530217.1"])
-
 vaccine = set(["MK441838.1","AF409138.1","OM793609.1","KX764645.1","MG972412.1","KX764643.1","KX764644.1","KX683219.1","MW631933.1"])
+
 L=[]
 freq = {}
 
+##Small function which takes an iterator and return TRUE if all the elements are equals
 def all_equal(iterator):
     iterator = iter(iterator)
     try:
@@ -26,23 +29,28 @@ def all_equal(iterator):
     return all(first == x for x in iterator)
 
 
-# opening the CSV file
+##opening the CSV file
 with open('3seq.62.csv', mode ='r')as file:
     
-  # reading the CSV file
+    ##reading the CSV file
     csvFile = csv.reader(file)
     summ = {}
     next(csvFile)
     for line in csvFile:
         line = line[0].split()
         #extract the accession numbers of parents (N1 and N2) and child (N3) genomes with regex
-        N1 =(re.findall("[A-Za-z]{2}\\d+\\.\\d+|[A-Za-z]{2}_\\d+\\.\\d+|[A-Za-z]\\d{5}\\.\\d+",line[0])[0])
-        N2 =(re.findall("[A-Za-z]{2}\\d+\\.\\d+|[A-Za-z]{2}_\\d+\\.\\d+|[A-Za-z]\\d{5}\\.\\d+",line[1])[0])
-        N3 =(re.findall("[A-Za-z]{2}\\d+\\.\\d+|[A-Za-z]{2}_\\d+\\.\\d+|[A-Za-z]\\d{5}\\.\\d+",line[2])[0])
+        N1 =(re.findall("[A-Za-z]{2}\\d+\\.\\d+|[A-Za-z]{2}_\\d+\\.\\d+|[A-Za-z]\\d{5}\\.\\d+",line[0])[0]) ##N1 is the first parent genome
+        N2 =(re.findall("[A-Za-z]{2}\\d+\\.\\d+|[A-Za-z]{2}_\\d+\\.\\d+|[A-Za-z]\\d{5}\\.\\d+",line[1])[0]) ##N2 is the second parent genome
+        N3 =(re.findall("[A-Za-z]{2}\\d+\\.\\d+|[A-Za-z]{2}_\\d+\\.\\d+|[A-Za-z]\\d{5}\\.\\d+",line[2])[0]) ##N3 is the child genome
+       
+        ##Creating a dictionnary with a parent couple as a key, and the child genome and the recombination regions as values
         if (N1,N2) not in summ :
             summ[(N1,N2)] = {"child" : [[N3, line[12],line[14]]]}
         else:
             summ[(N1,N2)]["child"].append([N3, line[12],line[14]])
+
+        ##Creating a list L of regions of recombinations
+        ##Creating a dictionnary freq of the frequency of the regions in the results
         if [line[12],line[14]] not in L: #L contains the regions, and freq the frequencies of these regions in recombination results
             L.append([line[12],line[14]])
             freq[str(line[12])+"-"+str(line[14])]=1
