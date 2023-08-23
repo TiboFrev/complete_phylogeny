@@ -1,6 +1,6 @@
 ###
 
-These scripts are miscellaneous scripts which were used to analyse my different results on LSDV phylogeny. This is really specific but can be adapted for some other works.
+These scripts are miscellaneous scripts which were used to analyse my different results on LSDV phylogeny. Some are really specific but can be adapted for some other works.
 
 
 ###Countinggaps.py
