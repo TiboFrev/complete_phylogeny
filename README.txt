@@ -1,12 +1,12 @@
 ### complete_phylogeny
 
-complete_phylogeny is a shell script which uses mafft (v7.520) and RAxML-ng (v8.2.X), and which accesses complete genomes of an organism available in Genbank to create phylogenetic trees and clustering analysis
-with FastBAPS
+complete_phylogeny is a shell script which uses mafft (v7.520) and RAxML-ng (v8.2.X), and which accesses complete genomes of one or several organisms available in Genbank to create phylogenetic trees and clustering analysis with FastBAPS
 This shell script uses every other scripts available in TiboFrev/complete_phylogeny/scripts
 
-How to use : ./complete_phylogeny -s [name of the organism]
-Other option : -r TRUE removes the annex files created by RAxML-ng
-               -h display help message
+How to use : ./complete_phylogeny.sh -s ORG1,ORG2,ORGn -t NAME_OF_RUN"
+Options : -r TRUE removes the annex files created by RAxML-ng
+          -h display help message
+          -d Having the -d option lets only one step of distance checking in the tree. Useful if you have several species. Not recommanded if you only have one species
 
 ### CGaccession.R
 
