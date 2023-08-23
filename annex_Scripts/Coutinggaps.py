@@ -1,6 +1,11 @@
-alignment = open("C:\\Users\\frevillet\\Desktop\\LSDV_GOATPOX_SHEEPOX.fasta","r") #alignment whre you want to count the gaps
+###This script takes in argument a sequence alignment and returns a csv file containing the percentage of gaps in each aligned sequence
+###It can be used to find poor quality sequences in an alignment for example
 
-#initialisation
+##Import the required packages
+import csv
+
+##Initialisation
+alignment = open("C:\\Users\\frevillet\\Desktop\\LSDV_GOATPOX_SHEEPOX.fasta","r") #alignment in which you want to count the gaps for each sequence
 ligne=alignment.readline()
 titre = ligne
 length=0
@@ -15,7 +20,7 @@ while ligne:
         while ligne and ligne[0]!=">": #Iterate through the entire sequence
             for i in range(len(ligne)):
                 if ligne[i] != "\n":
-                    length += 1 #length = total length
+                    length += 1 #total length
                     if ligne[i] == "-":
                         gaps+=1 #number of gaps
             ligne=alignment.readline()
@@ -24,8 +29,6 @@ while ligne:
         gaps = 0
         titre=""
 alignment.close()
-
-import csv
 
 with open('gapsPOXVIRUSES.csv', 'w') as csvfile: #summarise the information in a csv file
     filewriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
